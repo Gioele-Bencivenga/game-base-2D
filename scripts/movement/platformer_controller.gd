@@ -4,15 +4,15 @@ class_name PlatformerController extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 # Exports
-@export var move_speed : float = 300.0
-@export var coyote_time : float = 1.0
+@export var move_speed : float = 50
+@export var rotation_speed : float = 5
 @export var jump_buffer_time : float = 0.5
 @export var jump : BaseJump
 
 # Private variables
-var _is_coyote_time : bool = false
+var _default_direction : Vector2 = Vector2.UP
+var _input_direction : Vector2 = _default_direction
 var _is_jump_buffered : bool = false
-@onready var _coyote_time_tween : Tween = create_tween()
 @onready var _jump_buffer_tween : Tween = create_tween()
 @onready var _is_on_floor : bool = is_on_floor()
 @onready var _is_on_wall : bool = is_on_wall()
@@ -29,16 +29,7 @@ func _exit_tree():
 	if jump:
 		jump.unregister()
 
-func _ready():
-	_coyote_time_tween.tween_callback(
-		func() : _is_coyote_time = true
-	)
-	_coyote_time_tween.tween_interval(coyote_time)
-	_coyote_time_tween.tween_callback(
-		func() : _is_coyote_time = false
-	)
-	_coyote_time_tween.stop()
-	
+func _ready():	
 	_jump_buffer_tween.tween_callback(
 		func() : _is_jump_buffered = true
 	)
@@ -79,22 +70,22 @@ func _apply_gravity(delta):
 		velocity.y += gravity * delta
 
 func _apply_movement(_delta):
-	var direction = Input.get_axis("move_left", "move_right")
-	if direction:
-		velocity.x = direction * move_speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, move_speed)
-
 	if _is_on_floor:
 		on_move_ground.emit()
 	
+	get_input()
+	rotation = lerp_angle(rotation, _input_direction.angle(), _delta * rotation_speed)
+	velocity = Vector2(1, 0).rotated(rotation) * move_speed
 	move_and_slide()
+	
+func get_input():
+	if(Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right") || Input.is_action_pressed("move_up") || Input.is_action_pressed("move_down")):
+		_input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 func _apply_jump():
-	if Input.is_action_just_pressed("jump") or (_is_jump_buffered and _is_on_floor):
+	if Input.is_action_just_pressed("jump") or (_is_jump_buffered):
 		if _can_jump():
 			on_jump_start.emit()
-			_stop_coyote_time()
 			_stop_jump_buffer()
 		else:
 			_start_jump_buffer()
@@ -103,11 +94,10 @@ func _apply_jump():
 		on_jump_end.emit()
 
 func _on_touch_floor():
-	_stop_coyote_time()
+	pass
 	
 func _on_leave_floor():
-	if velocity.y >= 0.0:
-		_start_coyote_time()
+	pass
 
 func _on_touch_wall():
 	pass
@@ -116,14 +106,7 @@ func _on_leave_wall():
 	pass
 
 func _can_jump():
-	return _is_coyote_time or _is_on_floor
- 
-func _start_coyote_time():
-	_coyote_time_tween.play()
-	
-func _stop_coyote_time():
-	_is_coyote_time = false
-	_coyote_time_tween.stop()
+	return true
 
 func _start_jump_buffer():
 	if _is_jump_buffered:
