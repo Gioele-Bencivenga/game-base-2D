@@ -9,7 +9,8 @@
 script = ExtResource("2_4mo5d")
 jump_speed = 300.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t52sc"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a11w6"]
+size = Vector2(32, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kapla"]
 
@@ -134,12 +135,12 @@ script = ExtResource("1_mox32")
 jump = SubResource("Resource_j6tkt")
 
 [node name="Circle" type="Sprite2D" parent="."]
-position = Vector2(-5.96046e-07, 3.33786e-06)
-scale = Vector2(0.24, 0.36)
+position = Vector2(-6.67572e-06, 3.21865e-06)
+scale = Vector2(0.52, 0.28)
 texture = ExtResource("3_hxg5w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_t52sc")
+shape = SubResource("RectangleShape2D_a11w6")
 
 [node name="use_interactor" type="Area2D" parent="." groups=["player"]]
 script = ExtResource("4_18t1y")
