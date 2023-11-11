@@ -230,7 +230,7 @@ text = "Continue"
 
 [node name="settings_button" type="Button" parent="Main Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Settings"
+text = "Preferences"
 
 [node name="exit_button" type="Button" parent="Main Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
