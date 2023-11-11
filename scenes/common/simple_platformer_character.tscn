@@ -134,7 +134,8 @@ script = ExtResource("1_mox32")
 jump = SubResource("Resource_j6tkt")
 
 [node name="Circle" type="Sprite2D" parent="."]
-scale = Vector2(0.284, 0.284)
+position = Vector2(-5.96046e-07, 3.33786e-06)
+scale = Vector2(0.24, 0.36)
 texture = ExtResource("3_hxg5w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
