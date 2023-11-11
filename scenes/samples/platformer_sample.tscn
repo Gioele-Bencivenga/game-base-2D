@@ -247,7 +247,7 @@ viewport = NodePath("../../../minimap_viewport")
 
 [node name="camera_player" type="Camera2D" parent="."]
 position = Vector2(224, -27)
-zoom = Vector2(2, 2)
+zoom = Vector2(2.975, 2.975)
 editor_draw_limits = true
 
 [node name="CameraTargeter" type="Node" parent="camera_player" node_paths=PackedStringArray("camera")]
@@ -286,6 +286,10 @@ texture = ExtResource("10_e8em0")
 
 [node name="platformer_character" parent="." groups=["Saveable"] instance=ExtResource("7_y5jga")]
 position = Vector2(224, -27)
+motion_mode = 1
+move_speed = null
+rotation_speed = null
+jump_buffer_time = null
 
 [node name="camera_area 1" parent="." instance=ExtResource("11_xajsl")]
 position = Vector2(22, -2)
