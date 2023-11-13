@@ -247,7 +247,7 @@ viewport = NodePath("../../../minimap_viewport")
 
 [node name="camera_player" type="Camera2D" parent="."]
 position = Vector2(224, -27)
-zoom = Vector2(2.975, 2.975)
+zoom = Vector2(2, 2)
 editor_draw_limits = true
 
 [node name="CameraTargeter" type="Node" parent="camera_player" node_paths=PackedStringArray("camera")]

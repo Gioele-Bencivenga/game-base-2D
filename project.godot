@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Game Base 2D"
-run/main_scene="res://scenes/samples/platformer_sample.tscn"
+run/main_scene="res://scenes/my_scenes/movement.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 boot_splash/use_filter=false
 config/icon="res://icon.svg"
@@ -93,4 +93,8 @@ shoot={
 
 [physics]
 
-2d/default_gravity=500.0
+2d/default_gravity=200.0
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
