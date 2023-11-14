@@ -70,3 +70,4 @@ script = ExtResource("4_4hri3")
 
 [connection signal="input_ended" from="." to="ParticleEmitter" method="_on_player_input_ended"]
 [connection signal="input_started" from="." to="ParticleEmitter" method="_on_player_input_started"]
+[connection signal="input_gotten" from="InputGetter" to="." method="_on_input_getter_input_gotten"]
