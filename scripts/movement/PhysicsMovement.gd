@@ -25,7 +25,7 @@ func move(_input_direction : Vector2):
 	apply_force(_input_direction * thrust_speed.length())
 
 
-func _on_input_getter_input_changed(old_input : Vector2, new_input : Vector2):
+func _on_input_getter_input_gotten(old_input : Vector2, new_input : Vector2):
 	if(old_input == Vector2.ZERO 
 	and new_input != Vector2.ZERO):
 		start_input()
