@@ -1,19 +1,36 @@
 extends RigidBody2D
 
-@export var speed : float = 300
+@export var thrust_speed : Vector2 = Vector2(0, -300)
 
-var _default_direction : Vector2 = Vector2.UP
-var _input_direction : Vector2 = _default_direction
+signal input_started
+signal input_ended
 
-func _process(delta):
-	get_input()
-		
-	move()
+var _is_inputting : bool = false
 
-func get_input():
-	if(Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right") || Input.is_action_pressed("move_up") || Input.is_action_pressed("move_down")):
-		_input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+func _ready():
+	input_ended.emit()
 
-func move():
-	if(Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right") || Input.is_action_pressed("move_up") || Input.is_action_pressed("move_down")):
-		apply_force(_input_direction * speed)
+
+func start_input():
+	_is_inputting = true
+	input_started.emit()
+
+
+func end_input():
+	_is_inputting = false
+	input_ended.emit()
+
+
+func move(_input_direction : Vector2):
+	apply_force(_input_direction * thrust_speed.length())
+
+
+func _on_input_getter_input_changed(old_input : Vector2, new_input : Vector2):
+	if(old_input == Vector2.ZERO 
+	and new_input != Vector2.ZERO):
+		start_input()
+	if(old_input != Vector2.ZERO
+	and new_input == Vector2.ZERO):
+		end_input()
+	if(_is_inputting):
+		move(new_input)
