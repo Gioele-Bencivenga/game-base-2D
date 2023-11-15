@@ -3,6 +3,7 @@ extends RigidBody2D
 @export var max_speed : int = 200
 @export var thrust_speed : Vector2 = Vector2(0, -300)
 @export var rotation_speed : float = 3000
+@export var target : RigidBody2D
 
 var _is_inputting : bool = false
 var _input_direction : Vector2
@@ -21,6 +22,13 @@ func _integrate_forces(state):
 		# has to happen here because we modify constant_torque directly
 		# maybe find a way to make it work with add_constant_torque()?
 		turn(_input_direction)
+
+
+func _process(delta: float) -> void:
+	if target:
+		var direction = ( target.position - self.position).normalized()
+		move(direction)
+		_is_inputting = true
 
 
 func move(input_direction : Vector2):
