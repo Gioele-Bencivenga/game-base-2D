@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://be68lp64so5ko"]
+
+[ext_resource type="Script" path="res://scripts/movement/emitters/ParticleEmitter.gd" id="1_lep7k"]
+
+[sub_resource type="Gradient" id="Gradient_232oc"]
+colors = PackedColorArray(1, 0.921569, 0, 1, 0.729412, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2dxni"]
+gradient = SubResource("Gradient_232oc")
+
+[sub_resource type="Curve" id="Curve_m345f"]
+bake_resolution = 50
+_data = [Vector2(0, 0.213542), 0.0, 0.0, 0, 0, Vector2(0.250614, 0.645833), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tyw8s"]
+curve = SubResource("Curve_m345f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fa1c0"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 30.0
+gravity = Vector3(0, 20, 0)
+initial_velocity_min = 250.0
+initial_velocity_max = 300.0
+angular_velocity_min = -300.0
+angular_velocity_max = 300.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 15.0
+scale_max = 20.0
+scale_curve = SubResource("CurveTexture_tyw8s")
+color_ramp = SubResource("GradientTexture1D_2dxni")
+hue_variation_min = -0.05
+hue_variation_max = 0.05
+attractor_interaction_enabled = false
+collision_mode = 2
+
+[node name="ParticleEmitter" type="GPUParticles2D"]
+position = Vector2(0, 9)
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_fa1c0")
+lifetime = 0.17
+script = ExtResource("1_lep7k")

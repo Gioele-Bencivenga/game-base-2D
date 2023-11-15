@@ -1,36 +1,28 @@
 extends RigidBody2D
 
+@export var max_speed : int = 200
 @export var thrust_speed : Vector2 = Vector2(0, -300)
 
-signal input_started
-signal input_ended
 
-var _is_inputting : bool = false
-
-func _ready():
-	input_ended.emit()
-
-
-func start_input():
-	_is_inputting = true
-	input_started.emit()
-
-
-func end_input():
-	_is_inputting = false
-	input_ended.emit()
+func _integrate_forces(state):
+	# this speed limit can still be exceeded if the body is affected by external forces
+	if abs(get_linear_velocity().x) > max_speed or abs(get_linear_velocity().y) > max_speed:
+		var new_speed = get_linear_velocity().normalized()
+		new_speed *= max_speed
+		set_linear_velocity(new_speed)
 
 
 func move(_input_direction : Vector2):
 	apply_force(_input_direction * thrust_speed.length())
 
 
-func _on_input_getter_input_gotten(old_input : Vector2, new_input : Vector2):
-	if(old_input == Vector2.ZERO 
-	and new_input != Vector2.ZERO):
-		start_input()
-	if(old_input != Vector2.ZERO
-	and new_input == Vector2.ZERO):
-		end_input()
-	if(_is_inputting):
-		move(new_input)
+func _on_input_component_input_started(input : Vector2):
+	move(input)
+
+
+func _on_input_component_input_present(input : Vector2):
+	move(input)
+
+
+func _on_input_component_input_ended():
+	pass

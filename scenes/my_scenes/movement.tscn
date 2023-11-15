@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://i3tr5hqkf5d8"]
+[gd_scene load_steps=7 format=3 uid="uid://i3tr5hqkf5d8"]
 
-[ext_resource type="PackedScene" uid="uid://currjmpy82rwm" path="res://game_objects/player.tscn" id="1_n506d"]
+[ext_resource type="PackedScene" uid="uid://c61qvn4d20i5s" path="res://game_objects/player.tscn" id="1_n506d"]
+[ext_resource type="Script" path="res://scripts/camera/camera_targeter.gd" id="1_nyouc"]
 [ext_resource type="Texture2D" uid="uid://bi7fkmg3oosb7" path="res://sprites/shapes/square.png" id="3_0ebsd"]
 [ext_resource type="PackedScene" uid="uid://c6a15gkpxj6ym" path="res://game_objects/crate.tscn" id="3_8umse"]
 
@@ -12,11 +13,17 @@ size = Vector2(583, 20)
 
 [node name="Main" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_n506d")]
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("camera")]
+position = Vector2(53, -25)
 offset = Vector2(0, 1)
 zoom = Vector2(3, 3)
+script = ExtResource("1_nyouc")
+camera = NodePath(".")
+min_zoom = 1.0
+max_zoom = 3.0
+targets = Array[NodePath]([NodePath("../Player")])
+
+[node name="Player" parent="." instance=ExtResource("1_n506d")]
 
 [node name="Floor" type="RigidBody2D" parent="."]
 position = Vector2(0, 50)
