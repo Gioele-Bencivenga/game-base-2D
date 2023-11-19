@@ -60,7 +60,7 @@ offset = Vector2(0, 1)
 script = ExtResource("1_nyouc")
 camera = NodePath(".")
 min_zoom = 1.0
-max_zoom = 3.0
+max_zoom = 2.0
 targets = Array[NodePath]([NodePath("../Player")])
 
 [node name="Player" parent="." instance=ExtResource("1_n506d")]
@@ -131,9 +131,9 @@ script = ExtResource("5_7i1gh")
 position = Vector2(123, -24)
 gravity_scale = 0.5
 script = ExtResource("6_a3ihe")
-max_speed = 250
-thrust_speed = Vector2(0, -1000)
-rotation_speed = 2000.0
+max_speed = 230
+thrust_speed = Vector2(0, -2000)
+rotation_speed = 1500.0
 target = NodePath("../Player")
 
 [node name="ParticleEmitter" parent="missile" instance=ExtResource("7_0bw66")]

@@ -29,6 +29,11 @@ shape = SubResource("CapsuleShape2D_6kjv8")
 
 [node name="InputComponent" parent="." instance=ExtResource("4_g5snv")]
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-6, 10, 6, 10, 7, 28, -7, 28)
+
 [connection signal="input_ended" from="InputComponent" to="." method="_on_input_component_input_ended"]
 [connection signal="input_ended" from="InputComponent" to="ParticleEmitter" method="_on_input_component_input_ended"]
 [connection signal="input_present" from="InputComponent" to="." method="_on_input_component_input_present"]
