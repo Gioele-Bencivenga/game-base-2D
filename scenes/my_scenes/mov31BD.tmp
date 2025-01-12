@@ -55,6 +55,7 @@ height = 18.0
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("camera")]
 position = Vector2(53, -25)
 offset = Vector2(0, 1)
+zoom = Vector2(1, 1)
 script = ExtResource("1_nyouc")
 camera = NodePath(".")
 min_zoom = 1.0
@@ -69,8 +70,8 @@ isPlayer = true
 max_speed = 500
 thrust_speed = Vector2(0, -400)
 rotation_speed = 6000.0
-dash_speed = 150
-dash_cooldown = 3.0
+dash_speed = 90
+dash_cooldown = 2.0
 rigidbody = NodePath(".")
 
 [node name="Floor" type="RigidBody2D" parent="."]
