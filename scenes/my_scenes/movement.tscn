@@ -61,17 +61,16 @@ min_zoom = 1.0
 max_zoom = 2.0
 targets = Array[NodePath]([NodePath("../Player")])
 
-[node name="Player" parent="." node_paths=PackedStringArray("rigidbody") instance=ExtResource("1_n506d")]
+[node name="Player" parent="." instance=ExtResource("1_n506d")]
 linear_damp = 0.8
 angular_damp = 0.3
 script = ExtResource("6_a3ihe")
-isPlayer = true
+isPlayer = false
 max_speed = 500
 thrust_speed = Vector2(0, -400)
-rotation_speed = 6000.0
-dash_speed = 150
-dash_cooldown = 3.0
-rigidbody = NodePath(".")
+rotation_speed = 2000.0
+dash_speed = 1000
+dash_cooldown = 2.0
 
 [node name="Floor" type="RigidBody2D" parent="."]
 position = Vector2(0, 50)
@@ -158,3 +157,48 @@ region_rect = Rect2(0, 0, 16, 26)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="missile"]
 position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_xy8wr")
+
+[node name="crate12" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(-20, -115)
+
+[node name="crate13" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(-47, -109)
+
+[node name="crate14" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(-3, -85)
+
+[node name="crate15" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(-26, -81)
+
+[node name="crate16" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(-77, -42)
+
+[node name="crate17" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(-76, -22)
+
+[node name="crate18" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(-79, 2)
+
+[node name="crate19" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(-80, 25)
+
+[node name="crate20" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(8, -49)
+
+[node name="crate21" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(-52, -16)
+
+[node name="crate22" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(12, 0)
+
+[node name="crate23" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(13, -23)
+
+[node name="crate24" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(12, 23)
+
+[node name="crate25" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(-51, -48)
+
+[node name="crate26" parent="." instance=ExtResource("3_8umse")]
+position = Vector2(-53, -77)
