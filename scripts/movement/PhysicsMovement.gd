@@ -1,7 +1,7 @@
 extends RigidBody2D
 
-@export var max_speed : int = 200
-@export var thrust_speed : Vector2 = Vector2(0, -300)
+@export var max_speed : int = 500
+@export var thrust_speed : Vector2 = Vector2(0, -500)
 
 
 func _integrate_forces(state):
