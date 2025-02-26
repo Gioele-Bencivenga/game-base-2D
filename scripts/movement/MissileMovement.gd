@@ -18,6 +18,8 @@ var _spacebar_pressed : bool = false
 var _is_inputting : bool = false
 var _input_direction : Vector2
 
+#var _hover_timer : SceneTreeTimer
+
 func _ready():
 	angular_damp = 10
 
@@ -28,18 +30,20 @@ func _integrate_forces(state):
 		var new_speed = get_linear_velocity().normalized()
 		new_speed *= max_speed
 		set_linear_velocity(new_speed)
-	if(_is_inputting or _is_hovering):
+	if(_is_inputting or target != null #or _is_hovering
+	):
 		# has to happen here because we modify constant_torque directly
 		# maybe find a way to make it work with add_constant_torque()?
 		turn(_input_direction)
 		
 
 func _process(delta: float) -> void:
-	if _is_hovering and isPlayer:
-		move(Vector2(0, -1), thrust_speed/4.5)
+#	if _is_hovering and isPlayer:
+#		move(Vector2(0, -1), thrust_speed/4.5)
 	if target:
 		var direction = (target.position - self.position).normalized()
 		move(direction, thrust_speed)
+		
 	
 
 func move(input_direction : Vector2, speed : Vector2):
@@ -61,15 +65,16 @@ func turn(target_direction : Vector2):
 func _on_input_component_input_started(input : Vector2):
 	_is_inputting = true
 	move(input, thrust_speed)
-	_is_hovering = false
+#	_is_hovering = false
 
 
 func _on_input_component_input_present(input : Vector2):
 	_is_inputting = true
 	move(input, thrust_speed)
-	_is_hovering = false
+#	_is_hovering = false
 
 
 func _on_input_component_input_ended():
 	_is_inputting = false
-	get_tree().create_timer(1.5).timeout.connect(func(): _is_hovering = true)
+#	_hover_timer = get_tree().create_timer(1.5)
+#	_hover_timer.timeout.connect(func(): _is_hovering = true)
